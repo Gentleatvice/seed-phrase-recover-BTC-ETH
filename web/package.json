@@ -1,0 +1,25 @@
+{
+  "name": "seed-phrase-recovery-web",
+  "version": "0.1.0",
+  "description": "Web interface for Seed Phrase Auto Recovery",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "python3 -m http.server 3000 -d src"
+  },
+  "keywords": [
+    "cryptocurrency",
+    "bitcoin",
+    "ethereum",
+    "bip39",
+    "seed-phrase",
+    "recovery"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

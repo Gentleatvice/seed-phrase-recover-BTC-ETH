@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seed Phrase Auto Recovery</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔐 Seed Phrase Auto Recovery</h1>
+            <p class="subtitle">Recover cryptocurrency seed phrases with missing words</p>
+        </header>
+
+        <div class="warning-box">
+            <h3>⚠️ Security Warning</h3>
+            <ul>
+                <li>Never use this tool with real seed phrases on an online machine</li>
+                <li>Use only on air-gapped computers</li>
+                <li>For educational and recovery purposes only</li>
+                <li>Always verify on official wallet software</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Recovery Options</h2>
+            
+            <div class="form-group">
+                <label for="seedPhrase">Seed Phrase (use ??? for missing words)</label>
+                <textarea 
+                    id="seedPhrase" 
+                    rows="3" 
+                    placeholder="abandon abandon ??? abandon abandon abandon abandon abandon abandon abandon abandon about"
+                ></textarea>
+                <small>Example: "word1 word2 ??? word4 word5 ??? word7 word8 word9 word10 word11 word12"</small>
+            </div>
+
+            <div class="form-group">
+                <label for="targetAddress">Target Address (optional)</label>
+                <input 
+                    type="text" 
+                    id="targetAddress" 
+                    placeholder="1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+                >
+                <small>If provided, only phrases matching this address will be returned</small>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="cryptoType">Cryptocurrency</label>
+                    <select id="cryptoType">
+                        <option value="bitcoin">Bitcoin</option>
+                        <option value="ethereum">Ethereum</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="wordCount">Word Count</label>
+                    <select id="wordCount">
+                        <option value="12">12 words</option>
+                        <option value="15">15 words</option>
+                        <option value="18">18 words</option>
+                        <option value="21">21 words</option>
+                        <option value="24">24 words</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button id="recoverBtn" class="btn btn-primary">
+                    🔍 Start Recovery
+                </button>
+                <button id="validateBtn" class="btn btn-secondary">
+                    ✓ Validate Phrase
+                </button>
+                <button id="suggestBtn" class="btn btn-secondary">
+                    💡 Suggest Words
+                </button>
+            </div>
+        </div>
+
+        <div id="progressSection" class="card" style="display: none;">
+            <h2>Recovery Progress</h2>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+            <div class="progress-info">
+                <span id="progressText">Starting recovery...</span>
+                <span id="progressPercentage">0%</span>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">Attempts:</span>
+                    <span id="attempts">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Time Elapsed:</span>
+                    <span id="timeElapsed">0s</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Speed:</span>
+                    <span id="speed">0/s</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="resultSection" class="card" style="display: none;">
+            <h2>Results</h2>
+            <div id="resultContent"></div>
+        </div>
+
+        <div class="card">
+            <h2>How It Works</h2>
+            <ol>
+                <li>Enter your seed phrase with <code>???</code> marking missing words</li>
+                <li>Optionally provide a target address to verify against</li>
+                <li>The tool generates all possible combinations</li>
+                <li>Each combination is validated against BIP39 checksum</li>
+                <li>Valid phrases are used to derive addresses</li>
+                <li>Matching phrases are displayed</li>
+            </ol>
+        </div>
+
+        <footer>
+            <p>Open source on <a href="https://github.com/yourusername/seed-phrase-auto-recovery" target="_blank">GitHub</a></p>
+            <p>Built with Rust + JavaScript | MIT License</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

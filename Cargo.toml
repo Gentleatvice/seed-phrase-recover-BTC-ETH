@@ -1,0 +1,65 @@
+[package]
+name = "seed-phrase-auto-recovery"
+version = "0.1.0"
+edition = "2021"
+authors = ["Your Name <your.email@example.com>"]
+description = "A tool for recovering cryptocurrency seed phrases with missing words"
+license = "MIT"
+repository = "https://github.com/yourusername/seed-phrase-auto-recovery"
+keywords = ["cryptocurrency", "bitcoin", "bip39", "recovery", "seed-phrase"]
+categories = ["cryptography", "command-line-utilities"]
+
+[dependencies]
+# BIP39 and crypto
+bip39 = "2.0"
+bitcoin = { version = "0.31", features = ["rand"] }
+secp256k1 = { version = "0.28", features = ["rand"] }
+sha2 = "0.10"
+ripemd = "0.1"
+hmac = "0.12"
+pbkdf2 = "0.12"
+
+# Ethereum support
+tiny-keccak = { version = "2.0", features = ["keccak"] }
+
+# CLI
+clap = { version = "4.4", features = ["derive"] }
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Async and threading
+tokio = { version = "1.35", features = ["full"] }
+rayon = "1.8"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.8"
+
+# Utilities
+indicatif = "0.17"
+colored = "2.1"
+log = "0.4"
+env_logger = "0.11"
+
+[dev-dependencies]
+criterion = "0.5"
+proptest = "1.4"
+
+[[bin]]
+name = "seed-recovery"
+path = "src/main.rs"
+
+[lib]
+name = "seed_recovery"
+path = "src/lib.rs"
+
+[[bench]]
+name = "recovery_benchmark"
+harness = false
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
